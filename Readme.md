@@ -129,7 +129,7 @@ $ git submodule update --init --recursive
 
 ## Usage
 
-'''
+```
 if let request = SimpleHTTPRequest(url: URL(string: "https://reqres.in/api/users")!, httpMethod: .get) {
     if SimpleHTTP.enqueue(request: request) {
         SimpleHTTP.execute { (response, data, err) in
@@ -137,7 +137,7 @@ if let request = SimpleHTTPRequest(url: URL(string: "https://reqres.in/api/users
         }
     }
 }
-'''
+```
 
 ## License
 
