@@ -11,7 +11,7 @@ import XCTest
 
 class SimpleHttpUnitTest: XCTestCase {
     
-    var baseUrl: String = "https://ta.dreidev.com/api"
+    var baseUrl: String = "https://reqres.in"
     var url: URL!
     var simpleRequest: SimpleHTTPRequest?
     
@@ -42,27 +42,47 @@ class SimpleHttpUnitTest: XCTestCase {
         XCTAssertTrue(SimpleHTTP.enqueue(request: self.simpleRequest!))
     }
     
-    func testShouldExecuteRequest() {
-        let url = self.url.appendingPathComponent("/jobs/1")
-        let exp = expectation(description: "Execute request")
+    func testShouldExecuteGetRequest() {
+        let url = self.url.appendingPathComponent("/api/users?page=2")
+        let exp = expectation(description: "should execute get request with status code 200")
         if let simpleRequest = SimpleHTTPRequest(url: url, httpMethod: .get, parameters: nil) {
             if SimpleHTTP.enqueue(request: simpleRequest) {
-                measure {
-                    SimpleHTTP.execute(completionHandler: { (response, data, error) in
-                        if let data = data {
-                            let json = try? JSONSerialization.jsonObject(with: data, options: [])
-                            if let _ = json as? [String: Any] {
-                                exp.fulfill()
-                            } else {
-                                XCTFail()
-                            }
+                SimpleHTTP.execute(currentReachabilityStatus, completionHandler: { (response, data, error) in
+                    if let response = response as? HTTPURLResponse {
+                        if response.statusCode >= 200 && response.statusCode < 400 {
+                            exp.fulfill()
+                        } else {
+                            XCTFail()
                         }
-                    })
-                }
+                    }
+                })
+                
             }
             waitForExpectations(timeout: 10, handler: nil)
-            
         }
     }
+    
+//    func testShouldExecutePostRequest() {
+//        let url = self.url.appendingPathComponent("/jobs")
+//        let exp = expectation(description: "Execute request")
+//        if let simpleRequest = SimpleHTTPRequest(url: url, httpMethod: .post, parameters: nil) {
+//            if SimpleHTTP.enqueue(request: simpleRequest) {
+//                
+//                SimpleHTTP.execute(currentReachabilityStatus, completionHandler: { (response, data, error) in
+//                    if let data = data {
+//                        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+//                        if let _ = json as? [String: Any] {
+//                            exp.fulfill()
+//                        } else {
+//                            XCTFail()
+//                        }
+//                    }
+//                })
+//                
+//            }
+//            waitForExpectations(timeout: 10, handler: nil)
+//            
+//        }
+//    }
     
 }

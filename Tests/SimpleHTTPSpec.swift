@@ -47,21 +47,7 @@ class SimpleHTTPSpec: QuickSpec {
                 expect(SimpleHTTP.enqueue(request: self.simpleRequest!)).to(equal(true))
             }
             
-            it("should execute request") {
-                let url = self.url.appendingPathComponent("/posts")
-                if let simpleRequest = SimpleHTTPRequest(url: url, httpMethod: .get, parameters: nil) {
-                    if SimpleHTTP.enqueue(request: simpleRequest) {
-                        print("Should execute")
-                        SimpleHTTP.execute(completionHandler: { (response, data, error) in
-                            print("Executing")
-                            print(response ?? "No response")
-                            sleep(5)
-                        })
-                    }
-                    
-                }
-                
-            }
+            
         }
 
     }
