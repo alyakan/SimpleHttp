@@ -8,21 +8,21 @@
 
 import Foundation
 
-enum HTTPVerb {
-    case get
-    case post
-    case put
-    case delete
+enum HTTPMethod: String {
+    case get = "GET"
+    case post = "POSt"
+    case put = "PUT"
+    case delete = "DELETE"
 }
 
 class SimpleHTTPRequest {
-    private var url: URL!
-    private var httpVerb: HTTPVerb!
-    private var parameters: NSDictionary?
+    public private(set) var url: URL!
+    public private(set) var httpMethod: HTTPMethod!
+    public private(set) var parameters: NSDictionary?
     
-    init?(url: URL, httpVerb: HTTPVerb, parameters: NSDictionary?) {
+    init?(url: URL, httpMethod: HTTPMethod, parameters: NSDictionary?) {
         self.url = url
-        self.httpVerb = httpVerb
+        self.httpMethod = httpMethod
         self.parameters = parameters
     }
 }

@@ -12,6 +12,7 @@ import Nimble
 
 class SimpleHTTPSpec: QuickSpec {
     
+    var baseUrl: String = "https://jsonplaceholder.typicode.com"
     var url: URL!
     var simpleRequest: SimpleHTTPRequest?
     
@@ -23,8 +24,8 @@ class SimpleHTTPSpec: QuickSpec {
     override func spec() {
         
         beforeEach {
-            self.url = URL(string: "https://www.facebook.com")
-            self.simpleRequest = SimpleHTTPRequest(url: self.url, httpVerb: .get, parameters: nil)
+            self.url = URL(string: self.baseUrl)
+            self.simpleRequest = SimpleHTTPRequest(url: self.url, httpMethod: .get, parameters: nil)
         }
 
         describe("SimpleHTTPSpec") {
@@ -34,7 +35,7 @@ class SimpleHTTPSpec: QuickSpec {
             
             it("should create SimpleHttpRequest") {
                 if let url = self.url {
-                    if let _ = SimpleHTTPRequest(url: url, httpVerb: .get, parameters: nil) {
+                    if let _ = SimpleHTTPRequest(url: url, httpMethod: .get, parameters: nil) {
                         expect(true) == true
                     } else {
                         expect(false) == false
@@ -45,6 +46,22 @@ class SimpleHTTPSpec: QuickSpec {
             it("should enqueue request") {
                 expect(SimpleHTTP.enqueue(request: self.simpleRequest!)).to(equal(true))
             }
+            
+            it("should execute request") {
+                let url = self.url.appendingPathComponent("/posts")
+                if let simpleRequest = SimpleHTTPRequest(url: url, httpMethod: .get, parameters: nil) {
+                    if SimpleHTTP.enqueue(request: simpleRequest) {
+                        print("Should execute")
+                        SimpleHTTP.execute(completionHandler: { (response, data, error) in
+                            print("Executing")
+                            print(response ?? "No response")
+                            sleep(5)
+                        })
+                    }
+                    
+                }
+                
+            }
         }
 
     }
@@ -53,7 +70,7 @@ class SimpleHTTPSpec: QuickSpec {
         print("Testing createSimpleHttpRequest ...")
         if let url = self.url {
             print("Testing ...")
-            let simpleRequest = SimpleHTTPRequest(url: url, httpVerb: .get, parameters: nil)
+            let simpleRequest = SimpleHTTPRequest(url: url, httpMethod: .get, parameters: nil)
             XCTAssertNotNil(simpleRequest)
         }
     }
