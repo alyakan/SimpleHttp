@@ -18,6 +18,7 @@ struct SimpleHTTP {
      It tries to enqueue the request into a request queue for later execution.
      
      - Parameter request: A SimpleHttpRequest Optional Object.
+     
      - Returns: A boolean indicating the success or failure of enqueuing the request.
      */
     public static func enqueue(request: SimpleHTTPRequest?) -> Bool {
@@ -28,6 +29,16 @@ struct SimpleHTTP {
         return requestQueue.count == previousCount + 1
     }
     
+    /**
+     It tries to enqueue the request into a request queue for later execution.
+     
+     - Parameter url: A URL object.
+     - Parameter httpMethod: An HTTPMethodObject.
+     - Parameter parameters: An NSDictionary for key-value pairs for the HTTP body of the request.
+     - Parameter headers: A <String,String> Dictionary for HTTP headers.
+     
+     - Returns: A boolean indicating the success or failure of enqueuing the request.
+     */
     public static func enqueue(
         withUrl url: URL, httpMethod: HTTPMethod, parameters: NSDictionary? = nil,
         headers: Dictionary<String, String>? = nil) -> Bool {
@@ -98,5 +109,5 @@ struct SimpleHTTP {
         case .notReachable: return true
         }
     }
-
+    
 }

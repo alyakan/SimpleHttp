@@ -69,7 +69,27 @@ class SimpleHttpUnitTest: XCTestCase {
         if let simpleRequest = SimpleHTTPRequest(url: url, httpMethod: .post, parameters: ["name": "paul rudd", "movies": ["I love you man"]]) {
             if SimpleHTTP.enqueue(request: simpleRequest) {
                 SimpleHTTP.execute(currentReachabilityStatus, completionHandler: { (response, data, error) in
-                    print("Response: ", response ?? "No response")
+                    if let response = response as? HTTPURLResponse {
+                        if response.statusCode >= 200 && response.statusCode < 400 {
+                            exp.fulfill()
+                        } else {
+                            XCTFail()
+                        }
+                    }
+                })
+                
+            }
+            waitForExpectations(timeout: 10, handler: nil)
+            
+        }
+    }
+    
+    func testShouldExecutePutRequest() {
+        let url = self.url.appendingPathComponent("/users/1")
+        let exp = expectation(description: "should execute put request")
+        if let simpleRequest = SimpleHTTPRequest(url: url, httpMethod: .put, parameters: ["name": "paul rudd", "movies": ["I love you man"]]) {
+            if SimpleHTTP.enqueue(request: simpleRequest) {
+                SimpleHTTP.execute(currentReachabilityStatus, completionHandler: { (response, data, error) in
                     if let response = response as? HTTPURLResponse {
                         if response.statusCode >= 200 && response.statusCode < 400 {
                             exp.fulfill()
