@@ -28,9 +28,11 @@ struct SimpleHTTP {
         return requestQueue.count == previousCount + 1
     }
     
-    public static func enqueue(withUrl url: URL, httpMethod: HTTPMethod, parameters: NSDictionary?) -> Bool {
+    public static func enqueue(
+        withUrl url: URL, httpMethod: HTTPMethod, parameters: NSDictionary? = nil,
+        headers: Dictionary<String, String>? = nil) -> Bool {
         let previousCount = requestQueue.count
-        if let simpleRequest = SimpleHTTPRequest(url: url, httpMethod: httpMethod, parameters: parameters) {
+        if let simpleRequest = SimpleHTTPRequest(url: url, httpMethod: httpMethod, parameters: parameters, headers: headers) {
             requestQueue.append(simpleRequest)
         }
         return requestQueue.count == previousCount + 1
@@ -49,8 +51,14 @@ struct SimpleHTTP {
         return simpleRequest
     }
     
-    
-    public static func execute(_ status: NSObject.ReachabilityStatus, completionHandler: @escaping (_ response: URLResponse?, _ data: Data?, _ error: Error?) -> ()) {
+    /**
+     It asynchronously executes the next request in the queue in a background thread.
+     Maximum number of concurrent requests on Mobile Data is 2. On Wifi up to 6 concurrent requests will be handled.
+     
+     - Parameter status: should be set by using the NSObject's attribute currentReachabilityStatus
+     - Parameter completionHandles: A closure which returns response, data and error from executing the http request.
+     */
+    public static func execute(_ status: NSObject.ReachabilityStatus = .reachableViaWWAN, completionHandler: @escaping (_ response: URLResponse?, _ data: Data?, _ error: Error?) -> ()) {
         let executionThread = DispatchQueue.global(qos: .background)
         print("Reachability: \(status)")
         executionThread.async {
@@ -74,6 +82,11 @@ struct SimpleHTTP {
         urlRequest.httpMethod = simpleRequest.httpMethod.rawValue
         if let data = simpleRequest.parameters {
             urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+        }
+        if let headers = simpleRequest.headers {
+            for header in headers {
+                urlRequest.addValue(header.value, forHTTPHeaderField: header.key)
+            }
         }
         return urlRequest
     }

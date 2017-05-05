@@ -19,10 +19,12 @@ class SimpleHTTPRequest {
     public private(set) var url: URL!
     public private(set) var httpMethod: HTTPMethod!
     public private(set) var parameters: NSDictionary?
+    public private(set) var headers: Dictionary<String, String>?
     
-    init?(url: URL, httpMethod: HTTPMethod, parameters: NSDictionary?) {
+    init?(url: URL, httpMethod: HTTPMethod, parameters: NSDictionary? = nil, headers: Dictionary<String, String>? = nil) {
         self.url = url
         self.httpMethod = httpMethod
         self.parameters = parameters
+        self.headers = headers
     }
 }
