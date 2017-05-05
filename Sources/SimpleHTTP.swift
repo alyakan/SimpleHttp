@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SimpleHTTP {
+public struct SimpleHTTP {
     private init() {}
     
     fileprivate static var requestQueue:[SimpleHTTPRequest] = []

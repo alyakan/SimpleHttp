@@ -264,7 +264,7 @@
 		35CD65181E60192300AF060B /* watchOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 		718259901EBCAD6F00636120 /* SimpleHTTP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleHTTP.swift; sourceTree = "<group>"; };
 		7182599F1EBCAE7600636120 /* SimpleHTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleHTTPRequest.swift; sourceTree = "<group>"; };
-		71AE8E9A1EBD268C00C35478 /* ReachabilityStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityStatus.swift; sourceTree = "<group>"; };
+		71AE8E9A1EBD268C00C35478 /* ReachabilityStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReachabilityStatus.swift; path = ../Tests/ReachabilityStatus.swift; sourceTree = "<group>"; };
 		71B558401EBCCC7B00F768A8 /* SimpleHttpUnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleHttpUnitTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -370,7 +370,6 @@
 				3549BB8A1DA38C0A00C63030 /* SimpleHTTPSpec.swift */,
 				3549BB5B1DA38A8C00C63030 /* Supporting Files */,
 				71B558401EBCCC7B00F768A8 /* SimpleHttpUnitTest.swift */,
-				71AE8E9A1EBD268C00C35478 /* ReachabilityStatus.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -397,6 +396,7 @@
 		3549BB5C1DA38AA500C63030 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				71AE8E9A1EBD268C00C35478 /* ReachabilityStatus.swift */,
 				718259901EBCAD6F00636120 /* SimpleHTTP.swift */,
 				7182599F1EBCAE7600636120 /* SimpleHTTPRequest.swift */,
 			);

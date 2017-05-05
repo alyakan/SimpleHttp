@@ -8,14 +8,14 @@
 
 import Foundation
 
-enum HTTPMethod: String {
+public enum HTTPMethod: String {
     case get = "GET"
     case post = "POSt"
     case put = "PUT"
     case delete = "DELETE"
 }
 
-class SimpleHTTPRequest {
+public class SimpleHTTPRequest {
     public private(set) var url: URL!
     public private(set) var httpMethod: HTTPMethod!
     public private(set) var parameters: NSDictionary?
