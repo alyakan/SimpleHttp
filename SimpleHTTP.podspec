@@ -2,8 +2,8 @@ Pod::Spec.new do |s|
  s.name = 'SimpleHTTP'
  s.version = '0.0.1'
  s.license = { :type => "MIT", :file => "LICENSE" }
- s.summary = 'cookiecutter bootstrap template for swift framework'
- s.homepage = 'http://rahulkatariya.me'
+ s.summary = 'A simple, lightweight Networking framework that executes asynchronous http calls on background threads'
+ s.homepage = 'https://github.com/alyakan/SimpleHttp'
  s.social_media_url = 'https://twitter.com/rahulkatariya91'
  s.authors = { "Aly Yakan" => "aly.yakan@gmail.com" }
  s.source = { :git => "https://github.com/cookiecutter-swift/SimpleHTTP.git", :tag => "v"+s.version.to_s }
