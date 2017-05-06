@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
  s.homepage = 'https://github.com/alyakan/SimpleHttp'
  s.social_media_url = 'https://twitter.com/rahulkatariya91'
  s.authors = { "Aly Yakan" => "aly.yakan@gmail.com" }
- s.source = { :git => "https://github.com/cookiecutter-swift/SimpleHTTP.git", :tag => "v"+s.version.to_s }
+ s.source = { :git => "https://github.com/alyakan/SimpleHttp/blob/development/SimpleHTTP.zip", :tag => "v"+s.version.to_s }
  s.platforms     = { :ios => "8.0", :osx => "10.10", :tvos => "9.0", :watchos => "2.0" }
  s.requires_arc = true
 
