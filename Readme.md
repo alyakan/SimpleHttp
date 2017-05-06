@@ -76,7 +76,7 @@ import PackageDescription
 let package = Package(
     name: "HelloSimpleHTTP",
     dependencies: [
-        .Package(url: "https://github.com/cookiecutter-swift/SimpleHTTP.git", "0.0.1")
+        .Package(url: "https://github.com/alyakan/SimpleHttp.git", "0.0.1")
     ]
 )
 ```
@@ -96,7 +96,7 @@ $ git init
 - Add SimpleHTTP as a git [submodule](http://git-scm.com/docs/git-submodule) by running the following command:
 
 ```bash
-$ git submodule add https://github.com/cookiecutter-swift/SimpleHTTP.git
+$ git submodule add https://github.com/alyakan/SimpleHttp.git
 $ git submodule update --init --recursive
 ```
 
@@ -120,7 +120,7 @@ $ git submodule update --init --recursive
 
 #### Embeded Binaries
 
-- Download the latest release from https://github.com/cookiecutter-swift/SimpleHTTP/releases
+- Download the latest release from https://github.com/alyakan/SimpleHttp.git
 - Next, select your application project in the Project Navigator (blue project icon) to navigate to the target configuration window and select the application target under the "Targets" heading in the sidebar.
 - In the tab bar at the top of that window, open the "General" panel.
 - Click on the `+` button under the "Embedded Binaries" section.
@@ -141,4 +141,4 @@ if let request = SimpleHTTPRequest(url: URL(string: "https://reqres.in/api/users
 
 ## License
 
-SimpleHTTP is released under the MIT license. See [LICENSE](https://github.com/cookiecutter-swift/SimpleHTTP/blob/master/LICENSE) for details.
+SimpleHTTP is released under the MIT license. See [LICENSE](https://github.com/alyakan/SimpleHttp/blob/master/LICENSE) for details.
