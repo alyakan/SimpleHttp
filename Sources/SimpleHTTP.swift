@@ -13,6 +13,13 @@ public struct SimpleHTTP {
     
     fileprivate static var requestQueue:[SimpleHTTPRequest] = []
     fileprivate static var requestsInProcessing: Int = 0
+    public static var queueCount: Int {
+        return requestQueue.count
+    }
+    public static var isQueueEmpty: Bool {
+        return queueCount == 0
+    }
+    
     
     /**
      It tries to enqueue the request into a request queue for later execution.
@@ -21,12 +28,10 @@ public struct SimpleHTTP {
      
      - Returns: A boolean indicating the success or failure of enqueuing the request.
      */
-    public static func enqueue(request: SimpleHTTPRequest?) -> Bool {
-        let previousCount = requestQueue.count
+    public static func enqueue(request: SimpleHTTPRequest?) {
         if let request = request {
             requestQueue.append(request)
         }
-        return requestQueue.count == previousCount + 1
     }
     
     /**
@@ -41,12 +46,10 @@ public struct SimpleHTTP {
      */
     public static func enqueue(
         withUrl url: URL, httpMethod: HTTPMethod, parameters: NSDictionary? = nil,
-        headers: Dictionary<String, String>? = nil) -> Bool {
-        let previousCount = requestQueue.count
+        headers: Dictionary<String, String>? = nil) {
         if let simpleRequest = SimpleHTTPRequest(url: url, httpMethod: httpMethod, parameters: parameters, headers: headers) {
             requestQueue.append(simpleRequest)
         }
-        return requestQueue.count == previousCount + 1
     }
     
     /**
