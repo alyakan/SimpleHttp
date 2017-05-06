@@ -1,0 +1,10 @@
+framework module SimpleHTTP {
+  umbrella header "SimpleHTTP.h"
+
+  export *
+  module * { export * }
+}
+
+module SimpleHTTP.Swift {
+    header "SimpleHTTP-Swift.h"
+}
