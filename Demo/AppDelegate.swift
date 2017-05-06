@@ -18,13 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-//        if let request = SimpleHTTPRequest(url: URL(string: "https://reqres.in/api/users")!, httpMethod: .get) {
-//            if SimpleHTTP.enqueue(request: request) {
-//                SimpleHTTP.execute { (response, data, err) in
-//                    print("Response: ", response ?? "No Response")
-//                }
-//            }
-//        }
+        if let request = SimpleHTTPRequest(url: URL(string: "https://reqres.in/api/users")!, httpMethod: .get) {
+            for _ in 1 ... 100 {
+                SimpleHTTP.enqueue(request: request)
+                SimpleHTTP.execute { (response, data, err) in
+                    print("Count: ", SimpleHTTP.queueCount)
+                }
+            }
+            
+            
+        }
         
         return true
     }
