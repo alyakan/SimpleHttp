@@ -1,9 +1,11 @@
 {
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B015316DDDBB8DE1C86EE87CA058C4056342B588+++D319D2C",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "95438028B10BBB846574013D29F154A00556A9D1+++BE6753C" : 9223372036854775807,
+    "B015316DDDBB8DE1C86EE87CA058C4056342B588+++D319D2C" : 9223372036854775807,
     "E084C86B03F81D63323C9E7510697EA528A758C7+++387EE7C" : 9223372036854775807,
     "95438028B10BBB846574013D29F154A00556A9D1+++231572E" : 9223372036854775807,
     "95438028B10BBB846574013D29F154A00556A9D1+++2664596" : 9223372036854775807,
@@ -11,11 +13,12 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "73AED094-79E0-4BF0-8AD2-DA2D6CDCFBDD",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "95438028B10BBB846574013D29F154A00556A9D1+++BE6753C" : "SimpleHTTP\/Carthage\/Checkouts\/Quick\/Externals\/Nimble\/",
-    "E084C86B03F81D63323C9E7510697EA528A758C7+++387EE7C" : "SimpleHTTP\/Carthage\/Checkouts\/xcconfigs\/",
-    "95438028B10BBB846574013D29F154A00556A9D1+++231572E" : "SimpleHTTP\/Carthage\/Checkouts\/Nimble\/",
+    "95438028B10BBB846574013D29F154A00556A9D1+++BE6753C" : "SimpleHttp\/Carthage\/Checkouts\/Quick\/Externals\/Nimble\/",
+    "B015316DDDBB8DE1C86EE87CA058C4056342B588+++D319D2C" : "SimpleHttp\/",
+    "E084C86B03F81D63323C9E7510697EA528A758C7+++387EE7C" : "SimpleHttp\/Carthage\/Checkouts\/xcconfigs\/",
+    "95438028B10BBB846574013D29F154A00556A9D1+++231572E" : "SimpleHttp\/Carthage\/Checkouts\/Nimble\/",
     "95438028B10BBB846574013D29F154A00556A9D1+++2664596" : "SimpleHTTP\/Carthage\/Checkouts\/Quick\/Externals\/Nimble\/",
-    "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64+++2BF4988" : "SimpleHTTP\/Carthage\/Checkouts\/Quick\/"
+    "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64+++2BF4988" : "SimpleHttp\/Carthage\/Checkouts\/Quick\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "SimpleHTTP",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -35,6 +38,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Quick\/Nimble.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95438028B10BBB846574013D29F154A00556A9D1+++BE6753C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/alyakan\/SimpleHttp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B015316DDDBB8DE1C86EE87CA058C4056342B588+++D319D2C"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Quick\/Quick.git",
