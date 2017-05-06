@@ -11,8 +11,15 @@ import Foundation
 public struct SimpleHTTP {
     private init() {}
     
-    fileprivate static var requestQueue:[SimpleHTTPRequest] = []
+    fileprivate static var requestQueue:NSMutableArray = NSMutableArray()
     fileprivate static var requestsInProcessing: Int = 0
+    public static var queueCount: Int {
+        return requestQueue.count
+    }
+    public static var isQueueEmpty: Bool {
+        return queueCount == 0
+    }
+    
     
     /**
      It tries to enqueue the request into a request queue for later execution.
@@ -21,12 +28,13 @@ public struct SimpleHTTP {
      
      - Returns: A boolean indicating the success or failure of enqueuing the request.
      */
-    public static func enqueue(request: SimpleHTTPRequest?) -> Bool {
-        let previousCount = requestQueue.count
+    public static func enqueue(request: SimpleHTTPRequest?) {
         if let request = request {
-            requestQueue.append(request)
+//            requestQueue.append(request)
+            sync(lock: requestQueue) {
+                requestQueue.add(request)
+            }
         }
-        return requestQueue.count == previousCount + 1
     }
     
     /**
@@ -41,12 +49,12 @@ public struct SimpleHTTP {
      */
     public static func enqueue(
         withUrl url: URL, httpMethod: HTTPMethod, parameters: NSDictionary? = nil,
-        headers: Dictionary<String, String>? = nil) -> Bool {
-        let previousCount = requestQueue.count
+        headers: Dictionary<String, String>? = nil) {
         if let simpleRequest = SimpleHTTPRequest(url: url, httpMethod: httpMethod, parameters: parameters, headers: headers) {
-            requestQueue.append(simpleRequest)
+            sync(lock: requestQueue) {
+                requestQueue.add(simpleRequest)
+            }
         }
-        return requestQueue.count == previousCount + 1
     }
     
     /**
@@ -56,10 +64,26 @@ public struct SimpleHTTP {
      */
     public static func dequeue() -> SimpleHTTPRequest {
         let simpleRequest = requestQueue[0]
-        requestQueue.remove(at: 0)
+        sync(lock: requestQueue) {
+            requestQueue.removeObject(at: 0)
+        }
         requestsInProcessing += 1;
         print("Requests in processing: \(requestsInProcessing)")
-        return simpleRequest
+        return simpleRequest as! SimpleHTTPRequest
+    }
+    
+    /**
+     It locks an NSObject for synchronizing mutation. This is done
+     to prevent for example a pop and push happening at the same exact time
+     to maintain thread safety.
+     
+     - Parameter lock: An NSObject which you want to lock.
+     - Parameter closuer: A closure where the mutation on the object will be allowed.
+     */
+    static func sync(lock: NSObject, closure: () -> Void) {
+        objc_sync_enter(lock)
+        closure()
+        objc_sync_exit(lock)
     }
     
     /**
@@ -71,7 +95,6 @@ public struct SimpleHTTP {
      */
     public static func execute(_ status: NSObject.ReachabilityStatus = .reachableViaWWAN, completionHandler: @escaping (_ response: URLResponse?, _ data: Data?, _ error: Error?) -> ()) {
         let executionThread = DispatchQueue.global(qos: .background)
-        print("Reachability: \(status)")
         executionThread.async {
             /// Wait on processing requests if already busy
             while(isBusyProcessing(status)) {

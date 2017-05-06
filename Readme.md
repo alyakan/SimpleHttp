@@ -129,6 +129,16 @@ $ git submodule update --init --recursive
 
 ## Usage
 
+```
+if let request = SimpleHTTPRequest(url: URL(string: "https://reqres.in/api/users")!, httpMethod: .get) {
+    if SimpleHTTP.enqueue(request: request) {
+        SimpleHTTP.execute { (response, data, err) in
+            print("Response: ", response ?? "No Response")
+        }
+    }
+}
+```
+
 ## License
 
 SimpleHTTP is released under the MIT license. See [LICENSE](https://github.com/cookiecutter-swift/SimpleHTTP/blob/master/LICENSE) for details.
