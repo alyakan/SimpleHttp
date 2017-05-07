@@ -64,7 +64,7 @@ $ git submodule update --init --recursive
 ## Usage
 Inside your `ViewController.swift`, or any file you wish to use the framework, add the line `import SimpleHTTP` before any class declaration, if you can't find `SimpleHTTP`, make sure that you have built your project by selecting `Product -> Build`.
 
-For making a Get request, add the following where you want to make the HTTP call.
+For making a **GET** request, add the following where you want to make the HTTP call, change the url string to the api you want to request:
 
 ``` swift
 if let request = SimpleHTTPRequest(url: URL(string: "https://reqres.in/api/users")!, httpMethod: .get) { // Create a SimpleHTTPRequest Object
@@ -72,6 +72,18 @@ if let request = SimpleHTTPRequest(url: URL(string: "https://reqres.in/api/users
     SimpleHTTP.execute { (response, data, err) in // Execute the request and handle the data in a completion block.
         print("Response: ", response ?? "No Response")
     }
+}
+```
+For making a request an HTTP body such as a **POST** Request:
+
+``` swift
+var parameters: NSDictionary!
+parameters = ["name": "paul rudd", "movies": ["I love you man"]]
+if let simpleRequest = SimpleHTTPRequest(url: url, httpMethod: .post, parameters: self.parameters) {
+    SimpleHTTP.enqueue(request: simpleRequest)
+    SimpleHTTP.execute(currentReachabilityStatus, completionHandler: { (response, data, error) in // This is just another way to handle the completion block
+        print("Response: ", response ?? "No Response")
+    })
 }
 ```
 
