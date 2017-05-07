@@ -25,8 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     print("Count: ", SimpleHTTP.queueCount)
                 }
             }
-            
-            
         }
         
         return true

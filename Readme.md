@@ -1,16 +1,5 @@
 ## SimpleHTTP
-
-[![Platforms](https://img.shields.io/cocoapods/p/SimpleHTTP.svg)](https://cocoapods.org/pods/SimpleHTTP)
-[![License](https://img.shields.io/cocoapods/l/SimpleHTTP.svg)](https://raw.githubusercontent.com/cookiecutter-swift/SimpleHTTP/master/LICENSE)
-
-[![Swift Package Manager](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![CocoaPods compatible](https://img.shields.io/cocoapods/v/SimpleHTTP.svg)](https://cocoapods.org/pods/SimpleHTTP)
-
-[![Travis](https://img.shields.io/travis/cookiecutter-swift/SimpleHTTP/master.svg)](https://travis-ci.org/cookiecutter-swift/SimpleHTTP/branches)
-[![Cookiecutter-Swift](https://img.shields.io/badge/cookiecutter--swift-framework-red.svg)](http://github.com/cookiecutter-swift/Framework)
-
-cookiecutter bootstrap template for swift framework
+`SimpleHTTP` is a simple, lightweight Networking framework that executes asynchronous http calls on background threads so as to maintain thread safety. It takes into consideration whether the device is running on a Cellular or a Wifi network in order to adjust http requests processing accordingly.
 
 - [Requirements](#requirements)
 - [Installation](#installation)
@@ -73,13 +62,15 @@ $ git submodule update --init --recursive
 - And that's it!
 
 ## Usage
+Inside your `ViewController.swift`, or any file you wish to use the framework, add the line `import SimpleHTTP` before any class declaration, if you can't find `SimpleHTTP`, make sure that you have built your project by selecting `Product -> Build`.
+
+For making a Get request, add the following where you want to make the HTTP call.
 
 ``` swift
-if let request = SimpleHTTPRequest(url: URL(string: "https://reqres.in/api/users")!, httpMethod: .get) {
-    if SimpleHTTP.enqueue(request: request) {
-        SimpleHTTP.execute { (response, data, err) in
-            print("Response: ", response ?? "No Response")
-        }
+if let request = SimpleHTTPRequest(url: URL(string: "https://reqres.in/api/users")!, httpMethod: .get) { // Create a SimpleHTTPRequest Object
+    SimpleHTTP.enqueue(request: request) { // Enqueue the request, this part is mandatory.
+    SimpleHTTP.execute { (response, data, err) in // Execute the request and handle the data in a completion block.
+        print("Response: ", response ?? "No Response")
     }
 }
 ```
