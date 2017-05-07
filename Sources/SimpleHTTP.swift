@@ -92,6 +92,9 @@ public struct SimpleHTTP {
      
      - Parameter status: should be set by using the NSObject's attribute currentReachabilityStatus
      - Parameter completionHandler: A closure which returns response, data and error from executing the http request.
+     - Parameter response: A URLResponse Optional which contains the http response header of the http call.
+     - Parameter data: A Data Optional which contains the actual data of the response.
+     - Parameter error: An Error Optional which would only contain a value if there was an error in the http call returned from the server.
      */
     public static func execute(_ status: NSObject.ReachabilityStatus = .reachableViaWWAN, completionHandler: @escaping (_ response: URLResponse?, _ data: Data?, _ error: Error?) -> ()) {
         let executionThread = DispatchQueue.global(qos: .background)
