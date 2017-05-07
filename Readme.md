@@ -1,16 +1,5 @@
 ## SimpleHTTP
-
-[![Platforms](https://img.shields.io/cocoapods/p/SimpleHTTP.svg)](https://cocoapods.org/pods/SimpleHTTP)
-[![License](https://img.shields.io/cocoapods/l/SimpleHTTP.svg)](https://raw.githubusercontent.com/cookiecutter-swift/SimpleHTTP/master/LICENSE)
-
-[![Swift Package Manager](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![CocoaPods compatible](https://img.shields.io/cocoapods/v/SimpleHTTP.svg)](https://cocoapods.org/pods/SimpleHTTP)
-
-[![Travis](https://img.shields.io/travis/cookiecutter-swift/SimpleHTTP/master.svg)](https://travis-ci.org/cookiecutter-swift/SimpleHTTP/branches)
-[![Cookiecutter-Swift](https://img.shields.io/badge/cookiecutter--swift-framework-red.svg)](http://github.com/cookiecutter-swift/Framework)
-
-cookiecutter bootstrap template for swift framework
+`SimpleHTTP` is a simple, lightweight Networking framework that executes asynchronous http calls on background threads so as to maintain thread safety. It takes into consideration whether the device is running on a Cellular or a Wifi network in order to adjust http requests processing accordingly.
 
 - [Requirements](#requirements)
 - [Installation](#installation)
@@ -19,71 +8,14 @@ cookiecutter bootstrap template for swift framework
 
 ## Requirements
 
-- iOS 8.0+ / Mac OS X 10.10+ / tvOS 9.0+ / watchOS 2.0+
+- iOS 8.0+
 - Xcode 8.0+
 
 ## Installation
 
-### CocoaPods
-
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
-
-```bash
-$ gem install cocoapods
-```
-
-> CocoaPods 1.1.0+ is required to build SimpleHTTP 0.0.1+.
-
-To integrate SimpleHTTP into your Xcode project using CocoaPods, specify it in your `Podfile`:
-
-```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
-use_frameworks!
-
-pod 'SimpleHTTP', '~> 0.0.1'
-```
-
-Then, run the following command:
-
-```bash
-$ pod install
-```
-
-### Carthage
-
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that automates the process of adding frameworks to your Cocoa application.
-
-You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
-
-```bash
-$ brew update
-$ brew install carthage
-```
-
-To integrate SimpleHTTP into your Xcode project using Carthage, specify it in your `Cartfile`:
-
-```ogdl
-github "SimpleHTTP/SimpleHTTP" ~> 0.0.1
-```
-### Swift Package Manager
-
-To use SimpleHTTP as a [Swift Package Manager](https://swift.org/package-manager/) package just add the following in your Package.swift file.
-
-``` swift
-import PackageDescription
-
-let package = Package(
-    name: "HelloSimpleHTTP",
-    dependencies: [
-        .Package(url: "https://github.com/alyakan/SimpleHttp.git", "0.0.1")
-    ]
-)
-```
-
 ### Manually
 
-If you prefer not to use either of the aforementioned dependency managers, you can integrate SimpleHTTP into your project manually.
+You can integrate SimpleHTTP into your project manually.
 
 #### Git Submodules
 
@@ -116,6 +48,8 @@ $ git submodule update --init --recursive
 
 - And that's it!
 
+**Make sure to Build your project at any point before using the package.**
+
 > The `SimpleHTTP.framework` is automagically added as a target dependency, linked framework and embedded framework in a copy files build phase which is all you need to build on the simulator and a device.
 
 #### Embeded Binaries
@@ -128,14 +62,28 @@ $ git submodule update --init --recursive
 - And that's it!
 
 ## Usage
+Inside your `ViewController.swift`, or any file you wish to use the framework, add the line `import SimpleHTTP` before any class declaration, if you can't find `SimpleHTTP`, make sure that you have built your project by selecting `Product -> Build`.
 
-```
-if let request = SimpleHTTPRequest(url: URL(string: "https://reqres.in/api/users")!, httpMethod: .get) {
-    if SimpleHTTP.enqueue(request: request) {
-        SimpleHTTP.execute { (response, data, err) in
-            print("Response: ", response ?? "No Response")
-        }
+For making a **GET** request, add the following where you want to make the HTTP call, change the url string to the api you want to request:
+
+``` swift
+if let request = SimpleHTTPRequest(url: URL(string: "https://reqres.in/api/users")!, httpMethod: .get) { // Create a SimpleHTTPRequest Object
+    SimpleHTTP.enqueue(request: request) { // Enqueue the request, this part is mandatory.
+    SimpleHTTP.execute { (response, data, err) in // Execute the request and handle the data in a completion block.
+        print("Response: ", response ?? "No Response")
     }
+}
+```
+For making a request an HTTP body such as a **POST** Request:
+
+``` swift
+var parameters: NSDictionary!
+parameters = ["name": "paul rudd", "movies": ["I love you man"]]
+if let simpleRequest = SimpleHTTPRequest(url: url, httpMethod: .post, parameters: self.parameters) {
+    SimpleHTTP.enqueue(request: simpleRequest)
+    SimpleHTTP.execute(currentReachabilityStatus, completionHandler: { (response, data, error) in // This is just another way to handle the completion block
+        print("Response: ", response ?? "No Response")
+    })
 }
 ```
 
