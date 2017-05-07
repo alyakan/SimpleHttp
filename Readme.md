@@ -19,71 +19,14 @@ cookiecutter bootstrap template for swift framework
 
 ## Requirements
 
-- iOS 8.0+ / Mac OS X 10.10+ / tvOS 9.0+ / watchOS 2.0+
+- iOS 8.0+
 - Xcode 8.0+
 
 ## Installation
 
-### CocoaPods
-
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
-
-```bash
-$ gem install cocoapods
-```
-
-> CocoaPods 1.1.0+ is required to build SimpleHTTP 0.0.1+.
-
-To integrate SimpleHTTP into your Xcode project using CocoaPods, specify it in your `Podfile`:
-
-```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
-use_frameworks!
-
-pod 'SimpleHTTP', '~> 0.0.1'
-```
-
-Then, run the following command:
-
-```bash
-$ pod install
-```
-
-### Carthage
-
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that automates the process of adding frameworks to your Cocoa application.
-
-You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
-
-```bash
-$ brew update
-$ brew install carthage
-```
-
-To integrate SimpleHTTP into your Xcode project using Carthage, specify it in your `Cartfile`:
-
-```ogdl
-github "SimpleHTTP/SimpleHTTP" ~> 0.0.1
-```
-### Swift Package Manager
-
-To use SimpleHTTP as a [Swift Package Manager](https://swift.org/package-manager/) package just add the following in your Package.swift file.
-
-``` swift
-import PackageDescription
-
-let package = Package(
-    name: "HelloSimpleHTTP",
-    dependencies: [
-        .Package(url: "https://github.com/alyakan/SimpleHttp.git", "0.0.1")
-    ]
-)
-```
-
 ### Manually
 
-If you prefer not to use either of the aforementioned dependency managers, you can integrate SimpleHTTP into your project manually.
+You can integrate SimpleHTTP into your project manually.
 
 #### Git Submodules
 
@@ -116,6 +59,8 @@ $ git submodule update --init --recursive
 
 - And that's it!
 
+**Make sure to Build your project at any point before using the package.**
+
 > The `SimpleHTTP.framework` is automagically added as a target dependency, linked framework and embedded framework in a copy files build phase which is all you need to build on the simulator and a device.
 
 #### Embeded Binaries
@@ -129,7 +74,7 @@ $ git submodule update --init --recursive
 
 ## Usage
 
-```
+``` swift
 if let request = SimpleHTTPRequest(url: URL(string: "https://reqres.in/api/users")!, httpMethod: .get) {
     if SimpleHTTP.enqueue(request: request) {
         SimpleHTTP.execute { (response, data, err) in
