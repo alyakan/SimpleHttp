@@ -91,7 +91,7 @@ public struct SimpleHTTP {
      Maximum number of concurrent requests on Mobile Data is 2. On Wifi up to 6 concurrent requests will be handled.
      
      - Parameter status: should be set by using the NSObject's attribute currentReachabilityStatus
-     - Parameter completionHandles: A closure which returns response, data and error from executing the http request.
+     - Parameter completionHandler: A closure which returns response, data and error from executing the http request.
      */
     public static func execute(_ status: NSObject.ReachabilityStatus = .reachableViaWWAN, completionHandler: @escaping (_ response: URLResponse?, _ data: Data?, _ error: Error?) -> ()) {
         let executionThread = DispatchQueue.global(qos: .background)
